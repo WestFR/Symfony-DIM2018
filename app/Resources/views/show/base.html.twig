@@ -11,10 +11,10 @@
     <title>Blog Home - Start Bootstrap Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/blog-home.css" rel="stylesheet">
+    <link href="{{ asset('css/blog-home.css') }}" rel="stylesheet">
 
   </head>
 
@@ -27,6 +27,14 @@
         {{ parent() }} by Steven Francony
       {% endblock %}
     {% endembed %}
+
+    {% for label, message in app.flashes %}
+    <div class="alert alert-" role="alert">
+     {% for message in messages %}
+      {{ message }}
+     {% endfor %} 
+    </div>
+    {% endfor %}
 
     <!-- Page Content -->
     <div class="container">
@@ -76,8 +84,8 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
   </body>
 
