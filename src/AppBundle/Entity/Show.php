@@ -53,6 +53,7 @@ class Show {
 	 * @Assert\Image(minHeight=300, minWidth=750)
 	 */
 	private $mainPicture;
+	private $tmpPicture;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="Category")
@@ -110,6 +111,14 @@ class Show {
 	
 	public function setMainPicture ($mainPicture) {
 		$this->mainPicture = $mainPicture;
+	}
+
+	public function getTmpPicture () {
+		return $this->tmpPicture;
+	}
+	
+	public function setTmpPicture ($tmpPicture) {
+		$this->tmpPicture = $tmpPicture;
 	}
 
 	public function getCategory () {

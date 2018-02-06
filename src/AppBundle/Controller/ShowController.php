@@ -8,8 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use AppBundle\File\FileUploader;
 use AppBundle\Type\ShowType;
+
 use AppBundle\Entity\Show;
+use AppBundle\Entity\Category;
 
 /**
  * @Route(name="show_")
@@ -27,7 +30,7 @@ class ShowController extends Controller
     /**
      * @Route("/create", name="create")
      */
-    public function createAction(Request $request) {
+    public function createAction(Request $request, FileUploader $fileUploader) {
 
         $show = new Show();
         $form = $this->createForm(ShowType::class, $show);
@@ -36,10 +39,8 @@ class ShowController extends Controller
 
         if($form->isValid()) {
 
-            $generatedFileName = time().'_'.$show->getCategory()->getName().'.'.$show->getMainPicture()->guessClientExtension();
-            $path = $this->getParameter('kernel.project_dir').'/web'.$this->getParameter('upload_directory_file');
+            $generatedFileName = $fileUploader->upload($show->getMainPicture(), $show->getCategory()->getName());
 
-            $show->getMainPicture()->move($path, $generatedFileName);
             $show->setMainPicture($generatedFileName);
             
             $em = $this->getDoctrine()->getManager();
@@ -50,6 +51,24 @@ class ShowController extends Controller
             return $this->redirectToRoute('show_list');
         }
         
+        return $this->render('show/create.html.twig', ['showForm' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/update/{id}", name="update")
+     */
+    public function updateAction(Show $form) {
+
+        $form = $this->createForm(ShowType::class, $form);
+
+        $form->handleRequest($request);
+
+        if($form->isValid()) {
+
+            $this->addFlash('success', 'You successfully updated the show !');
+            return $this->redirectToRoute('show_list');
+        }
+
         return $this->render('show/create.html.twig', ['showForm' => $form->createView()]);
     }
 
