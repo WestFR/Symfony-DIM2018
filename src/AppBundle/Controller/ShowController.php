@@ -37,7 +37,7 @@ class ShowController extends Controller
         if($form->isValid()) {
 
             $generatedFileName = time().'_'.$show->getCategory()->getName().'.'.$show->getMainPicture()->guessClientExtension();
-            $path = $this->getParameter('kernel.project_dir').'web'.$this->getParameter('upload_directory_file');
+            $path = $this->getParameter('kernel.project_dir').'/web'.$this->getParameter('upload_directory_file');
 
             $show->getMainPicture()->move($path, $generatedFileName);
             $show->setMainPicture($generatedFileName);
@@ -45,10 +45,10 @@ class ShowController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($show);
             $em->flush();
+
+            $this->addFlash('success', 'You successfully added a new show !');
+            return $this->redirectToRoute('show_list');
         }
-
-
-        $this->addFlash('success', 'You successfully added a new show !');
         
         return $this->render('show/create.html.twig', ['showForm' => $form->createView()]);
     }
