@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -24,8 +24,8 @@ class ShowType extends AbstractType {
 			->add('abstract')
 			->add('country', CountryType::class, ['preferred_choices' => array('FR','US')])
 			->add('author')
-			->add('releaseDate', DateTimeType::class)
-			->add('tmpPicture', FileType::class, ['label' => 'Main Picture']);
+			->add('releaseDate', DateType::class)
+			->add('tmpPicture', FileType::class, ['label' => 'Image : ']);
 	}
 
 } 

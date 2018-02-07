@@ -12,7 +12,6 @@ use AppBundle\File\FileUploader;
 use AppBundle\Type\ShowType;
 
 use AppBundle\Entity\Show;
-use AppBundle\Entity\Category;
 
 /**
  * @Route(name="show_")
@@ -22,9 +21,13 @@ class ShowController extends Controller
     /**
      * @Route("/", name="list")
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
-        return $this->render('show/list.html.twig');
+        $shows = $this->getDoctrine()->getRepository(Show::class)->findAll();
+
+        return $this->render('show/list.html.twig', [
+            'shows' => $shows,
+        ]);
     }
 
     /**
@@ -37,9 +40,9 @@ class ShowController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isValid()) {
+        if($form->isSubmitted() && $form->isValid()) {
 
-            $generatedFileName = $fileUploader->upload($show->getMainPicture(), $show->getCategory()->getName());
+            $generatedFileName = $fileUploader->upload($show->getTmpPicture(), $show->getCategory()->getName());
 
             $show->setMainPicture($generatedFileName);
             
@@ -57,20 +60,20 @@ class ShowController extends Controller
     /**
      * @Route("/update/{id}", name="update")
      */
-    public function updateAction(Request $request, Show $form, FileUploader $fileUploader) {
+    public function updateAction(Request $request, Show $show, FileUploader $fileUploader) {
 
-        $form = $this->createForm(ShowType::class, $form);
+        $form = $this->createForm(ShowType::class, $show, ['validation_groups'=> ['update']]);
 
         $form->handleRequest($request);
 
-        if($form->isValid()) {
+        if($form->isSubmitted() && $form->isValid()) {
 
-            $generatedFileName = $fileUploader->upload($form->getMainPicture(), $form->getCategory()->getName());
-
-            $form->setMainPicture($generatedFileName);
+            if($show->getTmpPicture() != null) {      
+                $generatedFileName = $fileUploader->uploadReplace($show->getTmpPicture(), $show->getCategory()->getName(), $show->getMainPicture());  
+                $show->setMainPicture($generatedFileName);
+            }
             
             $em = $this->getDoctrine()->getManager();
-            $em->persist($form);
             $em->flush();
 
             $this->addFlash('success', 'You successfully updated the show !', ['validation_groups' => ['update']]);
@@ -78,12 +81,5 @@ class ShowController extends Controller
         }
 
         return $this->render('show/create.html.twig', ['showForm' => $form->createView()]);
-    }
-
-    public function categoriesAction() {
-        
-        return $this->render('_includes/categories.html.twig', [
-            'categories' => ['Web Design', 'HTML', "Freebies", "Test", "ok", "ok"]
-        ]);
     }
 }

@@ -53,6 +53,7 @@ class Show {
 	 * @Assert\Image(minHeight=300, minWidth=750, groups={"create"})
 	 */
 	private $mainPicture;
+	
 	private $tmpPicture;
 
 	/**

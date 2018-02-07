@@ -39,15 +39,39 @@ class CategoryController extends Controller
             return $this->redirectToRoute('show_list');
         }
 
-    
-        
         return $this->render('category/create.html.twig', ['showForm' => $form->createView()]);
     }
 
-    /*public function categoriesAction() {
+    /**
+     * @Route("/update/{id}", name="update")
+     */
+    public function updateAction(Request $request, Category $category) {
+
+        $form = $this->createForm(CategoryType::class, $category);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            $this->addFlash('success', 'You successfully updated the category !');
+            return $this->redirectToRoute('show_list');
+        }
+
+        return $this->render('category/create.html.twig', ['showForm' => $form->createView()]);
+    }
+
+    /*
+    * Lists categories in thumbnails
+    */
+    public function categoriesAction() {
+
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
         
         return $this->render('_includes/categories.html.twig', [
-            'categories' => ['Web Design', 'HTML', "Freebies", "Test", "ok", "ok"]
+            'categories' => $categories
         ]);
-    }*/
+    }
 }
