@@ -7,8 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use AppBundle\File\FileUploader;
+
+use AppBundle\Type\SearchType;
 use AppBundle\Type\ShowType;
 
 use AppBundle\Entity\Show;
@@ -18,6 +21,38 @@ use AppBundle\Entity\Show;
  */
 class ShowController extends Controller
 {
+
+    public function searchAction(Request $request)
+    {
+        $form = $this->createForm(SearchType::class);
+
+        return $this->render('_includes/search.html.twig', [
+                'showForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/search", name="research")
+     */
+    public function researchAction(Request $request)
+    {
+        $nameShow = $request->request->get("search")["name"];
+        //dump($nameShow);die;
+        //throw new NotFoundHttpException('!name '.$nameShow.'<');
+ 
+        if($nameShow != '')
+        {
+            $shows = $this->getDoctrine()->getRepository(Show::class)->findBy(['name' => $nameShow]);
+        }
+        else {
+            $shows = $this->getDoctrine()->getRepository(Show::class)->findAll();
+        }
+ 
+        return $this->render('show/list.html.twig', [
+            'shows' => $shows, 
+        ]);
+    }
+
     /**
      * @Route("/", name="list")
      */
