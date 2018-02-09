@@ -36,13 +36,21 @@ class ShowController extends Controller
      */
     public function researchAction(Request $request)
     {
-        $nameShow = $request->request->get("search")["name"];
-        //dump($nameShow);die;
+        $nameShow = $request->request->get("search")["name"].'%';
         //throw new NotFoundHttpException('!name '.$nameShow.'<');
  
         if($nameShow != '')
         {
-            $shows = $this->getDoctrine()->getRepository(Show::class)->findBy(['name' => $nameShow]);
+            $shows = $this->getDoctrine()->getRepository(Show::class)->createQueryBuilder('show')
+                    ->where('show.name LIKE :name')
+                    ->setParameter('name', $nameShow)
+                    ->getQuery()
+                    ->getResult();
+   
+
+            /*$shows = $his->getDoctrine()->getRepository(Show::class)->findBy(['name' => $nameShow]);*:
+
+
         }
         else {
             $shows = $this->getDoctrine()->getRepository(Show::class)->findAll();
