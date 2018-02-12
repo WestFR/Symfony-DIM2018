@@ -1,0 +1,15 @@
+<?php
+
+namespace AppBundle\Entity;
+
+class showRepository extends EntityRepository {
+
+	public function findAllByQuery($query) {
+		return $this->getDoctrine()->getRepository(Show::class)->createQueryBuilder('show')
+                    ->where('LOWER(show.name) LIKE :name')
+                    ->setParameter('name', $query)
+                    ->getQuery()
+                    ->getResult();
+	}
+
+}

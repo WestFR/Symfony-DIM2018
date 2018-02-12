@@ -37,6 +37,9 @@
 # Build data
 /build/
 
+# Vendor
+/vendor/
+
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
 

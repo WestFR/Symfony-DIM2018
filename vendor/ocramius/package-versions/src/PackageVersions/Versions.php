@@ -13,6 +13,10 @@ final class Versions
     const ROOT_PACKAGE_NAME = 'steven.fy/my_project';
     const VERSIONS = array (
   'composer/ca-bundle' => '1.1.0@943b2c4fcad1ef178d16a713c2468bf7e579c288',
+  'csa/guzzle-bundle' => 'v3.0.1@de4d86fcc473cdc2e4dfdfa9e72de7f91a0b8332',
+  'csa/guzzle-cache-middleware' => 'v1.0.0@a6a8716849b02d7597f815d0f6be7255a24c9c95',
+  'csa/guzzle-history-middleware' => 'v1.0.0@70c0a20b7ce5f19c8ec7ea8097e987c5d3340327',
+  'csa/guzzle-stopwatch-middleware' => 'v1.0.0@1612a9c87eb3c6167d38c4ea79ef3055cf50e93e',
   'doctrine/annotations' => 'v1.2.7@f25c8aab83e0c3e976fd7d19875f198ccf2f7535',
   'doctrine/cache' => 'v1.6.2@eb152c5100571c7a45470ff2a35095ab3f3b900b',
   'doctrine/collections' => 'v1.3.0@6c1e4eef75f310ea1b3e30945e9f06e652128b8a',
@@ -27,6 +31,9 @@ final class Versions
   'doctrine/migrations' => 'v1.5.0@c81147c0f2938a6566594455367e095150547f72',
   'doctrine/orm' => 'v2.5.14@810a7baf81462a5ddf10e8baa8cb94b6eec02754',
   'fig/link-util' => '1.0.0@1a07821801a148be4add11ab0603e4af55a72fac',
+  'guzzlehttp/guzzle' => '6.3.0@f4db5a78a5ea468d4831de7f0bf9d9415e348699',
+  'guzzlehttp/promises' => 'v1.3.1@a59da6cf61d80060647ff4d3eb2c03a2bc694646',
+  'guzzlehttp/psr7' => '1.4.2@f5b8a8512e2b58b0071a7280e39f14f72e05d87c',
   'incenteev/composer-parameter-handler' => 'v2.1.2@d7ce7f06136109e81d1cb9d57066c4d4a99cf1cc',
   'jdorn/sql-formatter' => 'v1.2.17@64990d96e0959dff8e059dfcdc1af130728d92bc',
   'monolog/monolog' => '1.23.0@fd8c787753b3a2ad11bc60c063cff1358a32a3b4',
@@ -35,6 +42,7 @@ final class Versions
   'paragonie/random_compat' => 'v2.0.11@5da4d3c796c275c55f057af5a643ae297d96b4d8',
   'psr/cache' => '1.0.1@d11b50ad223250cf17b86e38383413f5a6764bf8',
   'psr/container' => '1.0.0@b7ce3b176482dbbc1245ebf52b181af44c2cf55f',
+  'psr/http-message' => '1.0.1@f6561bf28d520154e4b0ec72be95418abe6d9363',
   'psr/link' => '1.0.0@eea8e8662d5cd3ae4517c9b864493f59fca95562',
   'psr/log' => '1.0.2@4ebe3a8bf773a19edfe0a84b6585ba3d401b724d',
   'psr/simple-cache' => '1.0.0@753fa598e8f3b9966c886fe13f370baa45ef0e24',
@@ -56,7 +64,7 @@ final class Versions
   'zendframework/zend-eventmanager' => '3.2.0@9d72db10ceb6e42fb92350c0cb54460da61bd79c',
   'sensio/generator-bundle' => 'v3.1.7@28cbaa244bd0816fd8908b93f90380bcd7b67a65',
   'symfony/phpunit-bridge' => 'v3.4.4@6a65b09b666f975dd70ec2bb9e9b1a87dbb02aca',
-  'steven.fy/my_project' => 'dev-master@84fb01d50c1fa9823b5bb71cbe53cf07324bcc48',
+  'steven.fy/my_project' => 'dev-master@40046fabb16ed018f4d806194104e34457155d8b',
 );
 
     private function __construct()

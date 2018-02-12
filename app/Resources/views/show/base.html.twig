@@ -59,7 +59,7 @@
         <div class="col-md-4">
 
           <!-- Search Widget -->
-          {{ render(controller("AppBundle\\Controller\\ShowController::searchAction")) }}
+          {{ include("_includes/search.html.twig") }}
 
           <!-- Category Widget -->
           {{ render(controller("AppBundle\\Controller\\CategoryController::categoriesAction")) }}

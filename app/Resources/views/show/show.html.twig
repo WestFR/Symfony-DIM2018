@@ -5,7 +5,7 @@
 <a href="{{ path('show_list') }}" class="btn btn-primary space-header"> &larr; Retour</a>
 
 
-<h1 class="my-4"> {{ show.name }} </h1>
+<h1 class="my-4"> {{ show.name }} - {{ show.category.name }} ( {{ show.country }} )</h1>
 {% endblock %}
 
 {% block content %}
@@ -16,7 +16,6 @@
     <img class="card-img-top" src="../uploads/{{ show.mainPicture }}" alt="Card image cap">
    
     <div class="card-body">
-      <h2 class="card-title">{{ show.name }} - {{ show.category.name }} ( {{ show.country }} )</h2>
 
       <p class="card-text">
         {{ show.abstract  }}

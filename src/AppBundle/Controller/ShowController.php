@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
+
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,6 +21,8 @@ use AppBundle\File\FileUploader;
 use AppBundle\Type\SearchType;
 use AppBundle\Type\ShowType;
 
+use AppBundle\ShowFinder\ShowFinder;
+
 use AppBundle\Entity\Show;
 
 /**
@@ -27,19 +31,31 @@ use AppBundle\Entity\Show;
 class ShowController extends Controller
 {
 
-    public function searchAction(Request $request)
+    /*public function searchAction(Request $request)
     {
         $form = $this->createForm(SearchType::class);
 
         return $this->render('_includes/search.html.twig', [
                 'showForm' => $form->createView()
         ]);
+    }*/
+
+    /**
+     * @Route("/", name="search")
+     * @Method({"POST"})
+     */
+    public function searchAction(Request $request)
+    {
+        $request->getSession()->set('query_search_shows', $request->request->get('query'));
+
+        return $this->redirectToRoute('show_list');
     }
+
 
     /**
      * @Route("/", name="research")
      */
-    public function researchAction(Request $request)
+    /*public function researchAction(Request $request)
     {
         $nameShow = $request->request->get("search")["name"].'%';
  
@@ -58,14 +74,23 @@ class ShowController extends Controller
         return $this->render('show/list.html.twig', [
             'shows' => $shows, 
         ]);
-    }
+    }*/
 
     /**
      * @Route("/", name="list")
      */
-    public function listAction(Request $request)
+    public function listAction(Request $request, ShowFinder $showFinder)
     {
-        $shows = $this->getDoctrine()->getRepository(Show::class)->findAll();
+        $showRepository = $this->getDoctrine()->getRepository('AppBundle:Show');
+        $session = $request->getSession();
+
+        if($session->has('query_search_shows')) {
+            $showFinder->findByName($session->get('query_search_shows'));
+        } else {
+            $shows = $showRepository->findAll();
+        }
+
+        /*$shows = $this->getDoctrine()->getRepository(Show::class)->findAll();*/
 
         return $this->render('show/list.html.twig', [
             'shows' => $shows,

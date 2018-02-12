@@ -69,5 +69,13 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+csa_guzzle:
+    profiler: '%kernel.debug%'
+    logger: true
+    clients :
+        OMDB_api:
+            config:
+                base_url: 'http://www.omdbapi.com/'
+
 
 
