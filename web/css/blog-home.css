@@ -13,3 +13,15 @@ body {
     padding-top: 56px;
   }
 }
+
+form.delete {
+	float: right;
+}
+
+.space-header {
+	margin-top: 30px;
+}
+
+.space-footer {
+	margin-bottom: 30px;
+}

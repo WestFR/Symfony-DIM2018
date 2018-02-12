@@ -24,6 +24,10 @@ class Category {
 	 */
 	private $name;
 
+	public function getid() {
+		return $this->id;
+	}
+
 	public function getName () {
 		return $this->name;
 	}

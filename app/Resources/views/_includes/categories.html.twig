@@ -14,7 +14,7 @@
 
    {% endif %} 
 
-   <li> <a href="#">{{ category.name }}</a> </li>
+   <li> <a href="{{ path('category_update', {'id': category.id}) }}">{{ category.name }}</a> </li>
 
    {% if (index%2) == 1 %}
         

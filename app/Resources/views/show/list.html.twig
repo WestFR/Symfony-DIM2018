@@ -19,7 +19,9 @@
         {{ show.abstract|length > 250 ? show.abstract|slice(0, 250) ~ '...' : show.abstract  }}
       </p>
 
-      <a href="#" class="btn btn-primary">Read More &rarr;</a>
+
+      <a href="{{ path('show_show', {'id': show.id}) }}" class="btn btn-primary">Read More ...</a>
+      
     </div>
 
     <div class="card-footer text-muted"> 

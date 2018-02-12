@@ -66,6 +66,11 @@ class Show {
 
 
 	// Getter / Setters //
+	public function getid() {
+		return $this->id;
+	}
+
+
 	public function getName () {
 		return $this->name;
 	}
