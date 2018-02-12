@@ -1,0 +1,25 @@
+{% extends "show/base.html.twig" %}
+
+{% block header %}
+<h1 class="my-4">Create a User</h1>
+{% endblock %}
+
+{% block content %}
+
+ {# {{ form(userForm) }} #}
+
+ {{ form_start(userForm, { "attr" : { "novalidate":"novalidate"}}) }}
+
+ 	{# {{ form_widget(userForm) }} #}
+
+	{{ form_label(userForm.name) }}
+	{{ form_widget(userForm.name) }}
+	{{ form_errors(userForm.name) }}
+
+ 	{{ form_rest(userForm) }}
+
+ 	<input class="btn-primary btn space-footer" type="submit" value="Create User"/>
+
+ {{ form_end(userForm ) }}
+
+{% endblock %}
