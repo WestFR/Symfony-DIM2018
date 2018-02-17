@@ -13,10 +13,10 @@ class DBShowFinder implements ShowFinderInterface {
 	}
 
 	public function findByName($query) {
-		$this->doctrine->getRepository('AppBundle:Show')->findAllByQuery($query);
+		return $this->doctrine->getRepository('AppBundle:Show')->findAllByQuery($query);
 	}
 
 	public function getName() {
-		return 'Local database';
+		return 'BDD_LOCAL';
 	}
 }

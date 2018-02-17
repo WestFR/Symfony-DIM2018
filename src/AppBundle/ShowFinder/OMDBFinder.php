@@ -13,11 +13,11 @@ class OMDBFinder implements ShowFinderInterface {
 	}
 
 	public function findByName($query) {
-		$result = $this->client->get('/?apikey=b99f30d1&type=series&t="walking"');
-		dump($result);die;
+		$result = $this->client->get('/?apikey=b99f30d1&type=series&t='. '%' . $query . '%');
+        return json_decode($result->getBody());
 	}
 
 	public function getName() {
-		return 'Online API';
+		return 'OMDB_API';
 	}
 }

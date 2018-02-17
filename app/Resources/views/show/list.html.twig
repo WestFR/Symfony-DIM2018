@@ -7,7 +7,30 @@
 {% block content %}
 <!-- Blog Post -->
 
-  {% for show in shows %}
+   {% if showOMDB is defined %}
+
+    {% if showOMDB.Response == "True" %}
+      <div class="card mb-4">
+
+        <img class="card-img-top" src="{{ showOMDB.Poster }}" alt="Card image cap">
+
+        <div class="card-body">
+          <h2 class="card-title">{{ showOMDB.Title }} - {{ showOMDB.Genre }} ( {{ showOMDB.Country }} )</h2>
+
+          <p class="card-text">{{showOMDB.Plot}} ...</p>
+        </div>
+
+        <div class="card-footer text-muted">
+          <p style="display: inline;"">
+            Posted on {{ showOMDB.Released|date('F d, Y') }} by <a href="#"> {{ showOMDB.Director }} </a> 
+          </p>
+          <p style="float: right; margin: 0;">Article Powered By OMDBApi</p>
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+
+  {% for show in showLocal %}
   <div class="card mb-4">
 
     <img class="card-img-top" src="uploads/{{ show.mainPicture }}" alt="Card image cap">
@@ -29,6 +52,11 @@
     </div>
   </div>
   {% endfor %}
+
+
+  {% if showLocal|length < 1 and showLocal|length < 1 %}
+  <p> No show found.</p>
+  {% endif %}
 
   <!-- Pagination
   <ul class="pagination justify-content-center mb-4">

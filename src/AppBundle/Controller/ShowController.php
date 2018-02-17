@@ -9,8 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -30,7 +28,7 @@ use AppBundle\Entity\Show;
  */
 class ShowController extends Controller
 {
-
+    // OLD INJECTION OF THIS VIEW AND FORM IN SHOW/BASE.BLADE.PHP
     /*public function searchAction(Request $request)
     {
         $form = $this->createForm(SearchType::class);
@@ -51,7 +49,7 @@ class ShowController extends Controller
         return $this->redirectToRoute('show_list');
     }
 
-
+    // OLD RESEARCH ROUTE
     /**
      * @Route("/", name="research")
      */
@@ -81,20 +79,29 @@ class ShowController extends Controller
      */
     public function listAction(Request $request, ShowFinder $showFinder)
     {
-        $showRepository = $this->getDoctrine()->getRepository('AppBundle:Show');
+        $showRepository = $this->getDoctrine()->getRepository(Show::class);
         $session = $request->getSession();
 
         if($session->has('query_search_shows')) {
-            $showFinder->findByName($session->get('query_search_shows'));
-        } else {
+            $show = $showFinder->findByName($session->get('query_search_shows'));
+            
+            $showLocal = $show['BDD_LOCAL'];
+            $showOMDB = $show['OMDB_API'];
+            $session->remove('query_search_shows');
+
+            return $this->render('show/list.html.twig',['showLocal' => $showLocal, 'showOMDB' => $showOMDB]);
+        }
+        else {
             $shows = $showRepository->findAll();
+            $session->remove('query_search_shows');
+            return $this->render('show/list.html.twig',['showLocal' => $shows]);
         }
 
         /*$shows = $this->getDoctrine()->getRepository(Show::class)->findAll();*/
 
-        return $this->render('show/list.html.twig', [
+        /*return $this->render('show/list.html.twig', [
             'shows' => $shows,
-        ]);
+        ]);*/
     }
 
     /**
