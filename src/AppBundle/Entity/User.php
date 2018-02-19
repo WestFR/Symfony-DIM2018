@@ -3,15 +3,17 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="users")
- * @UniqueEntity("name", message="{{ value }} is already in database.")
+ * @ORM\Table
+ * @UniqueEntity("email")
  */
-class User {
-
+class User implements UserInterface
+{
 	/**
 	 * @ORM\Id
 	 * @ORM\GeneratedValue
@@ -19,74 +21,74 @@ class User {
 	 */
 	private $id;
 
-	/**
-	 * @ORM\Column(type="string", unique=true)
-	 */
-	private $name;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $fullname;
+
+    private $roles;
+    
+    /**
+     * @ORM\Column
+     * @Assert\Email
+     */
+    private $email;
 
 	/**
-	 * @ORM\Column(type="string")
-	 */
-	private $surname;
-
-	/**
-	 * @ORM\Column(type="string")
-	 */
-	private $pseudo;
-
-	/**
-	 * @ORM\Column(type="string")
-	 */
-	private $email;
-
-	/**
-	 * @ORM\Column(type="string")
-	 */
-	private $password;
+     * @ORM\Column
+     */
+    private $password;
 
 
-	public function getid() {
-		return $this->id;
-	}
+    // GETTEURS / SETTEURS 
+    public function getid() {
+    	return $this->id;
+    }
 
-	public function getName () {
-		return $this->name;
-	}
+    public function getFullname() {
+        return $this->fullname;
+    }
 
-	public function setName ($name) {
-		$this->name = $name;
-	}
+    public function setFullname($fullname) {
+        $this->fullname = $fullname;
+    }
 
-	public function getSurname () {
-		return $this->name;
-	}
+    public function getRoles() {
+        return ['ROLE_USER'];
+    }
 
-	public function setSurname ($surname) {
-		$this->surname = $surname;
-	}
+    public function getEmail() {
+    	return $this->email;
+    }
 
-	public function getPseudo () {
-		return $this->pseudo;
-	}
+    public function setEmail($email) {
+    	$this->email = $email;
+    }
 
-	public function setPseudo ($pseudo) {
-		$this->pseudo = $pseudo;
-	}
+    public function getUsername()
+    {
+        return $this->email;
+    }
 
-	public function getEmail () {
-		return $this->email;
-	}
+    public function setUsername($email)
+    {
+        $this->email = $email;
+    }
 
-	public function setEmail ($email) {
-		$this->email = $email;
-	}
+    public function getPassword() {
+       return $this->password;
+    }
 
-	public function getPassword () {
-		return $this->password;
-	}
+    public function setPassword($password) {
+        $this->password = $password;
+    }
 
-	public function setPassword ($password) {
-		$this->password = $password;
-	}
+    public function getSalt() {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function eraseCredentials() {
+        // TODO: Implement eraseCredentials() method.
+    }
 
 }

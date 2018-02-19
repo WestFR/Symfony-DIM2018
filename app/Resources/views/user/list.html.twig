@@ -1,0 +1,33 @@
+{% extends "show/base.html.twig" %}
+
+{% block header %}
+<h1 class="my-4">List of users</h1>
+{% endblock %}
+
+{% block content %}
+
+	<table class="table my-4">
+	  
+	  <thead>
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Fullname</th>
+	      <th scope="col">Mail</th>
+	      <th scope="col">Password</th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+
+	  	{% for user in users %}
+		    <tr>
+		      <th scope="row">{{ user.id }}</th>
+		      <td>{{ user.fullname }}</td>
+		      <td>{{ user.email }}</td>
+		    </tr>
+	   	{% endfor %}
+
+	  </tbody>
+
+	</table>
+{% endblock content %}

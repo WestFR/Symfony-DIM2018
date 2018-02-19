@@ -4,6 +4,7 @@ security:
 
     encoders:
         Symfony\Component\Security\Core\User\User: bcrypt
+        AppBundle\Entity\User: sha512
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
@@ -13,6 +14,11 @@ security:
                     steven:
                         password: $2y$13$cn3eThmLKgl3L1UhlnfqSuK3dxryPHDzB/YgACt7y7rRhl06FBbBi 
                         roles: 'ROLE_USER'
+
+        database:
+            entity: 
+                class: AppBundle\Entity\User
+                property: email
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -26,7 +32,7 @@ security:
 
         secured_area:
             pattern: ^/
-            provider: in_memory
+            provider: database
             form_login:
                 login_path: /login
                 check_path: /login_check
@@ -34,6 +40,7 @@ security:
                 password_parameter: password
                 default_target_path: /
                 always_use_default_target_path: true
+            logout: ~ 
 
         main:
             anonymous: ~
