@@ -44,6 +44,11 @@ security:
 
         main:
             anonymous: ~
+
+    access_control:
+         - { path: ^/user, roles: ROLE_ADMIN }
+
+
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
