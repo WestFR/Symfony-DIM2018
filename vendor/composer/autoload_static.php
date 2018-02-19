@@ -41,6 +41,7 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
             'Symfony\\Polyfill\\Apcu\\' => 22,
             'Symfony\\Component\\' => 18,
             'Symfony\\Bundle\\SwiftmailerBundle\\' => 33,
+            'Symfony\\Bundle\\SecurityBundle\\' => 30,
             'Symfony\\Bundle\\MonologBundle\\' => 29,
             'Symfony\\Bundle\\' => 15,
             'Symfony\\Bridge\\Twig\\' => 20,
@@ -148,6 +149,10 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         'Symfony\\Bundle\\SwiftmailerBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/swiftmailer-bundle',
+        ),
+        'Symfony\\Bundle\\SecurityBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/security-bundle',
         ),
         'Symfony\\Bundle\\MonologBundle\\' => 
         array (

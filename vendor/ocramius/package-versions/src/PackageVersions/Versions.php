@@ -57,6 +57,7 @@ final class Versions
   'symfony/polyfill-php56' => 'v1.6.0@265fc96795492430762c29be291a371494ba3a5b',
   'symfony/polyfill-php70' => 'v1.6.0@0442b9c0596610bd24ae7b5f0a6cdbbc16d9fcff',
   'symfony/polyfill-util' => 'v1.6.0@6e719200c8e540e0c0effeb31f96bdb344b94176',
+  'symfony/security-bundle' => 'v4.0.4@2d65eb4f72e89cf9ee710a64be14922e81229d7b',
   'symfony/swiftmailer-bundle' => 'v2.6.7@c4808f5169efc05567be983909d00f00521c53ec',
   'symfony/symfony' => 'v3.4.4@5220b6f9fcdee261c6fdd3e096f3b204fba5d906',
   'twig/twig' => 'v1.35.0@daa657073e55b0a78cce8fdd22682fddecc6385f',
@@ -64,7 +65,7 @@ final class Versions
   'zendframework/zend-eventmanager' => '3.2.0@9d72db10ceb6e42fb92350c0cb54460da61bd79c',
   'sensio/generator-bundle' => 'v3.1.7@28cbaa244bd0816fd8908b93f90380bcd7b67a65',
   'symfony/phpunit-bridge' => 'v3.4.4@6a65b09b666f975dd70ec2bb9e9b1a87dbb02aca',
-  'steven.fy/my_project' => 'dev-master@40046fabb16ed018f4d806194104e34457155d8b',
+  'steven.fy/my_project' => 'dev-master@0dc85c4c5b3f1bf249bf3b71c488bbce69034e96',
 );
 
     private function __construct()

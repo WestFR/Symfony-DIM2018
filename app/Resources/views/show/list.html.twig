@@ -22,7 +22,12 @@
 
         <div class="card-footer text-muted">
           <p style="display: inline;"">
-            Posted on {{ showOMDB.Released|date('F d, Y') }} by <a href="#"> {{ showOMDB.Director }} </a> 
+            {% if showOMDB.Released != 'N/A' %}
+              Posted on {{ showOMDB.Released|date('F d, Y') }} by <a href="#"> {{ showOMDB.Director }} </a> 
+            {% else %}
+              Posted on {{ showOMDB.Released }} by <a href="#"> {{ showOMDB.Director }} </a> 
+            {% endif %}
+
           </p>
           <p style="float: right; margin: 0;">Article Powered By OMDBApi</p>
         </div>
@@ -54,7 +59,7 @@
   {% endfor %}
 
 
-  {% if showLocal|length < 1 and showLocal|length < 1 %}
+  {% if showLocal|length < 1 and showOMDB.Response == "False" %}
   <p> No show found.</p>
   {% endif %}
 
