@@ -29,6 +29,21 @@ class User {
 	 */
 	private $surname;
 
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	private $pseudo;
+
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	private $email;
+
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	private $password;
+
 
 	public function getid() {
 		return $this->id;
@@ -48,6 +63,30 @@ class User {
 
 	public function setSurname ($surname) {
 		$this->surname = $surname;
+	}
+
+	public function getPseudo () {
+		return $this->pseudo;
+	}
+
+	public function setPseudo ($pseudo) {
+		$this->pseudo = $pseudo;
+	}
+
+	public function getEmail () {
+		return $this->email;
+	}
+
+	public function setEmail ($email) {
+		$this->email = $email;
+	}
+
+	public function getPassword () {
+		return $this->password;
+	}
+
+	public function setPassword ($password) {
+		$this->password = $password;
 	}
 
 }

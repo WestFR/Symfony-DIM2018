@@ -5,9 +5,10 @@ namespace AppBundle\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
 class UserType extends AbstractType {
@@ -16,6 +17,15 @@ class UserType extends AbstractType {
 		$builder
 			->add('name')
 			->add('surname')
-			->add('Save', SubmitType::class);
+			->add('pseudo')
+			->add('email')
+			->add('password', RepeatedType::class, array(
+    				'type' => PasswordType::class,
+    				'invalid_message' => 'The password fields must match.',
+    				'options' => array('attr' => array('class' => 'password-field')),
+    				'required' => true,
+    				'first_options'  => array('label' => 'Password'),
+    				'second_options' => array('label' => 'Repeat Password'),
+    		));
 	}
 } 
