@@ -23,6 +23,11 @@ Follow this instructions to install the application & develop your features !
 3. Launch your server environment and your create your database with this command line :
 `bin/console doctrine:database:create`
 
+4. For correct use of the OMDB API, please follow these instructions (optional) :
+- Connect to this site for obtain your API KEY : http://www.omdbapi.com/
+- Add your API KEY in "config/parameter.yml" with the same name of "config/parameter.yml.dist" : "OMDB_api_key: your_key"
+- Now, you can search a show and retrieve results with local database and online API !
+
 
 ## Usage
 
