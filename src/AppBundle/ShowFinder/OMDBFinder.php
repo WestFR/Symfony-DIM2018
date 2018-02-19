@@ -16,15 +16,19 @@ class OMDBFinder implements ShowFinderInterface {
 		$this->apiKey = $apiKey;
 	}
 
-	public function findByName($query) {
-		$results = $this->client->get('/?apikey='.$this->apiKey.'&type=series&t="'.$query.'"');
-		$json = \GuzzleHttp\json_decode($results->getBody(), true);
+	/**
+     * @param String $query
+     * @return Show|array|null
+     */
+	public function findByName($query) {	
+		$result = $this->client->get('/?apikey='.$this->apiKey.'&type=series&t="'.$query.'"');
+		$json = json_decode($result->getBody(), true);
 
 		if ($json['Response'] == 'False' && $json['Error'] == 'Series not found!') {
 			return [];
 		}
- 
-		return json_decode($results->getBody());
+		//dump(\GuzzleHttp\json_decode($result->getBody(), true)); die;
+		return $this->convertToShow($json);
 	}
 
 	/**
@@ -41,15 +45,16 @@ class OMDBFinder implements ShowFinderInterface {
 
 		$shows = [];
 		$show = new Show();
-		$show
-			->setName($json['Title'])
-			->setDataSource(Show::DATA_SOURCE_OMDB)
-			->setAbstract('Not provided.')
-			->setCountry($json['Country'])
-			->setAuthor('TO DO when the authentication!')
-			->setReleaseDate(new \DateTime($json['Released']))
-			->setMainPicture($json['Poster'])
-			->setCategory($category);
+		
+		$show->setName($json['Title']);
+		$show->setAbstract($json['Plot']);
+		$show->setDatasource(Show::DATA_SOURCE_OMDB);
+		$show->setCountry($json['Country']);
+		$show->getAuthor();
+		$show->setRealisator($json['Writer']);
+		$show->setReleaseDate(new \DateTime($json['Released']));
+		$show->setMainPicture($json['Poster']);
+		$show->setCategory($category);
 
 		$shows[] = $show;
 

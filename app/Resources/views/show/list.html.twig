@@ -5,63 +5,47 @@
 {% endblock %}
 
 {% block content %}
-<!-- Blog Post -->
 
-   {% if showOMDB is defined %}
+  <!-- Show Post -->
+  {% for show in shows %}
+    <div class="card mb-4">
 
-    {% if showOMDB.Response == "True" %}
-      <div class="card mb-4">
-
-        <img class="card-img-top" src="{{ showOMDB.Poster }}" alt="Card image cap">
-
-        <div class="card-body">
-          <h2 class="card-title">{{ showOMDB.Title }} - {{ showOMDB.Genre }} ( {{ showOMDB.Country }} )</h2>
-
-          <p class="card-text">{{showOMDB.Plot}} ...</p>
-        </div>
-
-        <div class="card-footer text-muted">
-          <p style="display: inline;"">
-            {% if showOMDB.Released != 'N/A' %}
-              Posted on {{ showOMDB.Released|date('F d, Y') }} by <a href="#"> {{ showOMDB.Director }} </a> 
-            {% else %}
-              Posted on {{ showOMDB.Released }} by <a href="#"> {{ showOMDB.Director }} </a> 
-            {% endif %}
-
-          </p>
-          <p style="float: right; margin: 0;">Article Powered By OMDBApi</p>
-        </div>
-      </div>
+    <!-- Set Image -->
+    {% set img = '' %}
+    {% if show.dataSource == constant('AppBundle\\Entity\\Show::DATA_SOURCE_DB') %}
+      {% set img = asset(upload_folder ~'/'~ show.mainPicture) %}
+    {% elseif show.dataSource == constant('AppBundle\\Entity\\Show::DATA_SOURCE_OMDB') %}
+      {% set img = show.mainPicture %}
     {% endif %}
-  {% endif %}
 
-  {% for show in showLocal %}
-  <div class="card mb-4">
+      <img class="card-img-top" src="{{ img }}" alt="{{ show.name}}">
+     
+      <div class="card-body">
+        <h2 class="card-title">{{ show.name }} - {{ show.category.name }} ( {{ show.country }} )</h2>
 
-    <img class="card-img-top" src="uploads/{{ show.mainPicture }}" alt="Card image cap">
-   
-    <div class="card-body">
-      <h2 class="card-title">{{ show.name }} - {{ show.category.name }} ( {{ show.country }} )</h2>
+        <p class="card-text">
+          {{ show.abstract|length > 250 ? show.abstract|slice(0, 250) ~ '...' : show.abstract ~ '.'  }}
+        </p>
 
-      <p class="card-text">
-        {{ show.abstract|length > 250 ? show.abstract|slice(0, 250) ~ '...' : show.abstract  }}
-      </p>
+        {% if show.dataSource == constant('AppBundle\\Entity\\Show::DATA_SOURCE_DB') %}
+          <a href="{{ path('show_show', {'id': show.id}) }}" class="btn btn-primary">Read More ...</a>
+        {% endif %}
+        
+      </div>
 
+      <div class="card-footer text-muted"> 
+        Posted on {{ show.releaseDate|date('F d, Y') }} by 
 
-      <a href="{{ path('show_show', {'id': show.id}) }}" class="btn btn-primary">Read More ...</a>
-      
+        {% if show.dataSource == constant('AppBundle\\Entity\\Show::DATA_SOURCE_DB') %}
+          <a href="#"> {{ show.author }} </a>
+        {% else %}
+          <a href="#"> {{ show.realisator }} </a>
+        {% endif %}
+      </div>
     </div>
-
-    <div class="card-footer text-muted"> 
-      Posted on {{ show.releaseDate|date('F d, Y') }} by <a href="#"> {{ show.author }} </a>
-    </div>
-  </div>
+  {% else %}
+    <p> No show are found, sorry.</p>
   {% endfor %}
-
-
-  {% if showLocal|length < 1 and showOMDB.Response == "False" %}
-  <p> No show found.</p>
-  {% endif %}
 
   <!-- Pagination
   <ul class="pagination justify-content-center mb-4">

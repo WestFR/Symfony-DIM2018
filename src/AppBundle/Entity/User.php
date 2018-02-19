@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -39,8 +40,17 @@ class User implements UserInterface
      */
     private $password;
 
+	/*
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Show", mappedBy="author"))
+     */
+    private $shows;
 
-    // GETTEURS / SETTEURS 
+    /* Constructor */
+    public function __construct() {
+    	$this->shows = new ArrayCollection();
+    }
+
+    /* GETTEURS / SETTEURS */
     public function getid() {
     	return $this->id;
     }
@@ -54,6 +64,7 @@ class User implements UserInterface
     }
 
     public function getRoles() {
+    	//return ['ROLE_USER'];
         return ['ROLE_ADMIN'];
     }
 
@@ -89,6 +100,14 @@ class User implements UserInterface
 
     public function eraseCredentials() {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function addShow(Show $show) {
+    	if(!$this->shows->contains($show)) $this->shows->add($show);
+    }
+
+    public function removeShow(Show $show) {
+    	$this->shows->remove($show);
     }
 
 }

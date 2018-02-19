@@ -81,27 +81,15 @@ class ShowController extends Controller
     {
         $showRepository = $this->getDoctrine()->getRepository(Show::class);
         $session = $request->getSession();
-
-        if($session->has('query_search_shows')) {
-            $show = $showFinder->findByName($session->get('query_search_shows'));
-            
-            $showLocal = $show['BDD_LOCAL'];
-            $showOMDB = $show['OMDB_API'];
+        
+        if ($session->has('query_search_shows')) {
+            $shows = $showFinder->searchByName($session->get('query_search_shows'));
             $session->remove('query_search_shows');
-
-            return $this->render('show/list.html.twig',['showLocal' => $showLocal, 'showOMDB' => $showOMDB]);
-        }
-        else {
+        } else {
             $shows = $showRepository->findAll();
-            $session->remove('query_search_shows');
-            return $this->render('show/list.html.twig',['showLocal' => $shows]);
         }
 
-        /*$shows = $this->getDoctrine()->getRepository(Show::class)->findAll();*/
-
-        /*return $this->render('show/list.html.twig', [
-            'shows' => $shows,
-        ]);*/
+        return $this->render('show/list.html.twig', ['shows' => $shows]);
     }
 
     /**
@@ -133,6 +121,7 @@ class ShowController extends Controller
             $generatedFileName = $fileUploader->upload($show->getTmpPicture(), $show->getCategory()->getName());
 
             $show->setMainPicture($generatedFileName);
+            $show->setDataSource(Show::DATA_SOURCE_DB);
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($show);
