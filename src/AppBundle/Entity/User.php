@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -12,6 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity
  * @ORM\Table
  * @UniqueEntity("email")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class User implements UserInterface
 {
@@ -19,11 +22,15 @@ class User implements UserInterface
 	 * @ORM\Id
 	 * @ORM\GeneratedValue
 	 * @ORM\Column(type="integer")
+     *
+     * @JMS\Groups({"user"})
 	 */
 	private $id;
 
     /**
      * @ORM\Column(type="string")
+     * @JMS\Expose
+     * @JMS\Groups({"user", "show"})
      */
     private $fullname;
 
@@ -35,6 +42,9 @@ class User implements UserInterface
     /**
      * @ORM\Column
      * @Assert\Email
+     *
+     * @JMS\Expose
+     * @JMS\Groups({"user"})
      */
     private $email;
 

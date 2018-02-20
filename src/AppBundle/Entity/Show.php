@@ -3,12 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ShowRepository")
  * @ORM\Table(name="s_shows")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Show {
 
@@ -26,24 +29,36 @@ class Show {
 	/**
 	 * @ORM\Column
 	 * @Assert\NotBlank(message="Please provide a name for the show.", groups={"create", "update"})
+	 *
+	 * @JMS\Expose
+	 * @JMS\Groups({"show"})
 	 */
 	private $name;
 
 	/**
 	 * @ORM\Column(type="text")
 	 * @Assert\NotBlank(groups={"create", "update"})
+	 *
+	 * @JMS\Expose
+	 * @JMS\Groups({"show"})
 	 */
 	private $abstract;
 
 	/**
 	 * @ORM\Column
 	 * @Assert\NotBlank(groups={"create", "update"})
+	 *
+	 * @JMS\Expose
+	 * @JMS\Groups({"show"})
 	 */
 	private $country;
 
 	/**
 	 * @ORM\Column(type="string")
 	 * @Assert\NotBlank(groups={"create", "update"})
+	 *
+	 * @JMS\Expose
+	 * @JMS\Groups({"show"})
 	 */
 	private $realisator;
 
@@ -51,26 +66,36 @@ class Show {
      * @Assert\NotBlank(groups={"create","update"})
      * @ORM\ManyToOne(targetEntity="User", inversedBy="shows")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *
+	 * @JMS\Expose
+	 * @JMS\Groups({"show"})
      */
 	private $author;
 
 	/**
+	 * @Assert\NotBlank(groups={"create", "update"})
 	 * @ORM\ManyToOne(targetEntity="Category")
 	 * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
 	 *
-	 * @Assert\NotBlank(groups={"create", "update"})
+	 * @JMS\Expose
+	 * @JMS\Groups({"show"})
 	 */
 	private $category;
 
 	/**
 	 * @ORM\Column(type="date")
 	 * @Assert\NotBlank(groups={"create", "update"})
+	 *
+	 * @JMS\Expose
+	 * @JMS\Groups({"show"})
 	 */
 	private $releaseDate;
 
 	/**
 	 * @ORM\Column
 	 * @Assert\Image(minHeight=300, minWidth=750, groups={"create"})
+	 *
+	 * @JMS\Expose
 	 */
 	private $mainPicture;
 	

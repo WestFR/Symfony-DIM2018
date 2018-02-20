@@ -2,34 +2,31 @@
 
 namespace AppBundle\Api;
 
+use AppBundle\Entity\Category;
+use JMS\Serializer\SerializerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Symfony\Component\HttpFoundation\Response;
 
-use Symfony\Component\Serializer\SerializerInterface;
-
-use AppBundle\Entity\Category;
-
 /**	
- * @Route("/categories", name="api_categories_list")
+ * @Route("/categories", name="api_categories")
  */
 class CategoryController extends Controller {
 
 	/**
 	 * @Method({"GET"})
-	 * @Route("/all", name="api_categories_list")
+	 * @Route("/all", name="_list")
 	 */
 	public function getAll(SerializerInterface $serializer) {
-
 		$categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-		$data = $serializer->serialize($categories, 'json');
-
-		return new Response($data);
+		return $this->returnResponse($serializer->serialize($categories, 'json'), Response::HTTP_OK);
 	}
 
-	/*public function get() {
-
-	}*/
+	/**
+	 * @Method({"GET"})
+	 * @Route("/{id}", name="_get")
+	 */
+	public function getOne(Category $category, SerializerInterface $serializer) {
+		return $this->returnResponse($serializer->serialize($category, 'json'), Response::HTTP_OK);
+	}
 }
