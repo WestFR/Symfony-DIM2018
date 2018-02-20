@@ -28,16 +28,6 @@ use AppBundle\Entity\Show;
  */
 class ShowController extends Controller
 {
-    // OLD INJECTION OF THIS VIEW AND FORM IN SHOW/BASE.BLADE.PHP
-    /*public function searchAction(Request $request)
-    {
-        $form = $this->createForm(SearchType::class);
-
-        return $this->render('_includes/search.html.twig', [
-                'showForm' => $form->createView()
-        ]);
-    }*/
-
     /**
      * @Route("/", name="search")
      * @Method({"POST"})
@@ -45,34 +35,8 @@ class ShowController extends Controller
     public function searchAction(Request $request)
     {
         $request->getSession()->set('query_search_shows', $request->request->get('query'));
-
         return $this->redirectToRoute('show_list');
     }
-
-    // OLD RESEARCH ROUTE
-    /**
-     * @Route("/", name="research")
-     */
-    /*public function researchAction(Request $request)
-    {
-        $nameShow = $request->request->get("search")["name"].'%';
- 
-        if($nameShow != '')
-        {
-            $shows = $this->getDoctrine()->getRepository(Show::class)->createQueryBuilder('show')
-                    ->where('show.name LIKE :name')
-                    ->setParameter('name', $nameShow)
-                    ->getQuery()
-                    ->getResult();
-        }
-        else {
-            $shows = $this->getDoctrine()->getRepository(Show::class)->findAll();
-        }
- 
-        return $this->render('show/list.html.twig', [
-            'shows' => $shows, 
-        ]);
-    }*/
 
     /**
      * @Route("/", name="list")
@@ -189,5 +153,38 @@ class ShowController extends Controller
         return $this->redirectToRoute('show_list'); 
     }
 
+    // OLD INJECTION OF THIS VIEW AND FORM IN SHOW/BASE.BLADE.PHP
+    /*public function searchAction(Request $request)
+    {
+        $form = $this->createForm(SearchType::class);
 
+        return $this->render('_includes/search.html.twig', [
+                'showForm' => $form->createView()
+        ]);
+    }*/
+
+    // OLD RESEARCH ROUTE
+    /**
+     * @Route("/", name="research")
+     */
+    /*public function researchAction(Request $request)
+    {
+        $nameShow = $request->request->get("search")["name"].'%';
+ 
+        if($nameShow != '')
+        {
+            $shows = $this->getDoctrine()->getRepository(Show::class)->createQueryBuilder('show')
+                    ->where('show.name LIKE :name')
+                    ->setParameter('name', $nameShow)
+                    ->getQuery()
+                    ->getResult();
+        }
+        else {
+            $shows = $this->getDoctrine()->getRepository(Show::class)->findAll();
+        }
+ 
+        return $this->render('show/list.html.twig', [
+            'shows' => $shows, 
+        ]);
+    }*/
 }
