@@ -10,11 +10,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use AppBundle\Entity\Show;
 
+/**	
+ * @Route("/shows", name="api_categories_list")
+ */
 class ShowController extends Controller {
 
 	/**
 	 * @Method({"GET"})
-	 * @Route("/shows", name="api_shows_list")
+	 * @Route("/all", name="api_shows_list")
 	 */
 	public function getAll() {
 

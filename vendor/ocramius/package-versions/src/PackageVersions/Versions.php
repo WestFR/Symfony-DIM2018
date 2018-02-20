@@ -36,10 +36,16 @@ final class Versions
   'guzzlehttp/psr7' => '1.4.2@f5b8a8512e2b58b0071a7280e39f14f72e05d87c',
   'incenteev/composer-parameter-handler' => 'v2.1.2@d7ce7f06136109e81d1cb9d57066c4d4a99cf1cc',
   'jdorn/sql-formatter' => 'v1.2.17@64990d96e0959dff8e059dfcdc1af130728d92bc',
+  'jms/metadata' => '1.6.0@6a06970a10e0a532fb52d3959547123b84a3b3ab',
+  'jms/parser-lib' => '1.0.0@c509473bc1b4866415627af0e1c6cc8ac97fa51d',
+  'jms/serializer' => '1.11.0@e7c53477ff55c21d1b1db7d062edc050a24f465f',
+  'jms/serializer-bundle' => '2.3.1@9dec7ab62248aa97f33cce70c301af15154f8f0b',
   'monolog/monolog' => '1.23.0@fd8c787753b3a2ad11bc60c063cff1358a32a3b4',
   'ocramius/package-versions' => '1.3.0@4489d5002c49d55576fa0ba786f42dbb009be46f',
   'ocramius/proxy-manager' => '2.1.1@e18ac876b2e4819c76349de8f78ccc8ef1554cd7',
   'paragonie/random_compat' => 'v2.0.11@5da4d3c796c275c55f057af5a643ae297d96b4d8',
+  'phpcollection/phpcollection' => '0.5.0@f2bcff45c0da7c27991bbc1f90f47c4b7fb434a6',
+  'phpoption/phpoption' => '1.5.0@94e644f7d2051a5f0fcf77d81605f152eecff0ed',
   'psr/cache' => '1.0.1@d11b50ad223250cf17b86e38383413f5a6764bf8',
   'psr/container' => '1.0.0@b7ce3b176482dbbc1245ebf52b181af44c2cf55f',
   'psr/http-message' => '1.0.1@f6561bf28d520154e4b0ec72be95418abe6d9363',
@@ -65,7 +71,7 @@ final class Versions
   'zendframework/zend-eventmanager' => '3.2.0@9d72db10ceb6e42fb92350c0cb54460da61bd79c',
   'sensio/generator-bundle' => 'v3.1.7@28cbaa244bd0816fd8908b93f90380bcd7b67a65',
   'symfony/phpunit-bridge' => 'v3.4.4@6a65b09b666f975dd70ec2bb9e9b1a87dbb02aca',
-  'steven.fy/my_project' => 'dev-master@0dc85c4c5b3f1bf249bf3b71c488bbce69034e96',
+  'steven.fy/my_project' => 'dev-api_showroom@50aed8010b2e378f5b78a35f688109eb16674368',
 );
 
     private function __construct()
