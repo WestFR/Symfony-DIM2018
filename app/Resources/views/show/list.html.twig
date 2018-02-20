@@ -37,7 +37,12 @@
         Posted on {{ show.releaseDate|date('F d, Y') }} by 
 
         {% if show.dataSource == constant('AppBundle\\Entity\\Show::DATA_SOURCE_DB') %}
-          <a href="#"> {{ show.realisator }} </a> - Show added by <a href="#"> {{ show.author.fullname }} </a>
+          <a href="#"> {{ show.realisator }} </a> - 
+          {% if is_granted('ROLE_ADMIN', show) %}
+            Show added by <a href="#"> {{ show.author.fullname }} (You) </a>
+          {% else %}
+            Show added by <a href="#"> {{ show.author.fullname }} </a>
+          {% endif %}
         {% else %}
           <a href="#"> {{ show.realisator }} </a> - Show research by <a href="#"> {{ show.author.fullname }} </a>
         {% endif %}

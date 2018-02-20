@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  {% if is_granted('ROLE_ADMIN', show) %}
+  {% if is_granted('ROLE_ADMIN') %}
   <div class="space-footer ">
    <a href="{{ path('show_update', {'id': show.id}) }}" class="btn btn-warning">Update &rarr;</a>
 

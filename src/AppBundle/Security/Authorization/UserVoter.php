@@ -9,7 +9,7 @@ use AppBundle\Entity\User;
 
 class UserVoter extends Voter {
 
-	const ROLE_ADMIN = 'ROME_ADMIN';
+	const ROLE_ADMIN = 'ROLE_ADMIN';
 
 	public function voteOnAttribute($attribute, $subject, TokenInterface $token) {
 
