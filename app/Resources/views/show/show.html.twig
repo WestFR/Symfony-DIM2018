@@ -1,4 +1,4 @@
-{% extends "show/base.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block header %}
 
@@ -24,10 +24,12 @@
     </div>
 
     <div class="card-footer text-muted"> 
-      Posted on {{ show.releaseDate|date('F d, Y') }} by <a href="#"> {{ show.author }} </a>
+      Posted on {{ show.releaseDate|date('F d, Y') }} by <a href="#"> {{ show.realisator }} </a> 
+      - Show added by <a href="#"> {{ show.author.fullname }} </a>
     </div>
   </div>
 
+  {% if is_granted('ROLE_ADMIN', show) %}
   <div class="space-footer ">
    <a href="{{ path('show_update', {'id': show.id}) }}" class="btn btn-warning">Update &rarr;</a>
 
@@ -37,5 +39,6 @@
       <button type="submit" class="btn btn-danger">Delete X</a>
     </form>
   </div>
+  {% endif %}
 
 {% endblock %}

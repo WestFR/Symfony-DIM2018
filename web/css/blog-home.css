@@ -25,3 +25,29 @@ form.delete {
 .space-footer {
 	margin-bottom: 30px;
 }
+
+.black {
+	color: black !important;
+}
+
+.btn-secondary {
+	color: rgba(255,255,255,.5);
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.btn-secondary:hover {
+	color : rgba(255,255,255,.75);
+	background-color: transparent;
+	border-color: transparent;
+	cursor: pointer;
+}
+
+.show>.btn-secondary.dropdown-toggle, 
+.btn-secondary:not([disabled]):not(.disabled):active, .show>.btn-secondary.dropdown-toggle,
+.btn-secondary:not([disabled]):not(.disabled).active, .btn-secondary:not([disabled]):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}

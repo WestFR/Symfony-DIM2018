@@ -122,13 +122,14 @@ class ShowController extends Controller
 
             $show->setMainPicture($generatedFileName);
             $show->setDataSource(Show::DATA_SOURCE_DB);
+            $show->setAuthor($this->getUser());
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($show);
             $em->flush();
 
             $this->addFlash('success', 'You successfully added a new show !');
-            return $this->redirectToRoute('show_list');
+            return $this->redirectToRoute('user_list');
         }
         
         return $this->render('show/create.html.twig', ['showForm' => $form->createView()]);

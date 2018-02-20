@@ -6,13 +6,17 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Show;
 use GuzzleHttp\Client;
 
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+
 class OMDBFinder implements ShowFinderInterface {
 
 	private $client;
+	private $tokenStorage;
 	private $apiKey;
 
-	public function __construct(Client $client, $apiKey) {
+	public function __construct(Client $client, TokenStorage $tokenStorage, $apiKey) {
 		$this->client = $client;
+		$this->tokenStorage = $tokenStorage;
 		$this->apiKey = $apiKey;
 	}
 
@@ -50,7 +54,7 @@ class OMDBFinder implements ShowFinderInterface {
 		$show->setAbstract($json['Plot']);
 		$show->setDatasource(Show::DATA_SOURCE_OMDB);
 		$show->setCountry($json['Country']);
-		$show->getAuthor();
+		$show->setAuthor($this->tokenStorage->getToken()->getUser());
 		$show->setRealisator($json['Writer']);
 		$show->setReleaseDate(new \DateTime($json['Released']));
 		$show->setMainPicture($json['Poster']);

@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
 use AppBundle\Entity\User;
 
 /**
@@ -49,11 +48,10 @@ class Show {
 	private $realisator;
 
 	/**
-      * @ORM\Column(type="string")
-      * @Assert\NotBlank(groups={"create","update"})
-      * @ORM\ManyToOne(targetEntity="User", inversedBy="shows")
-      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-      */
+     * @Assert\NotBlank(groups={"create","update"})
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="shows")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
 	private $author;
 
 	/**

@@ -27,6 +27,9 @@ class User implements UserInterface
      */
     private $fullname;
 
+    /**
+     * @ORM\Column(type="json_array")
+     */
     private $roles;
     
     /**
@@ -40,14 +43,13 @@ class User implements UserInterface
      */
     private $password;
 
-	/*
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Show", mappedBy="author"))
+	/**
+     * @ORM\OneToMany(targetEntity="Show", mappedBy="author")
      */
     private $shows;
 
-    /* Constructor */
     public function __construct() {
-    	$this->shows = new ArrayCollection();
+        $this->shows = new ArrayCollection();
     }
 
     /* GETTEURS / SETTEURS */
@@ -64,8 +66,11 @@ class User implements UserInterface
     }
 
     public function getRoles() {
-    	//return ['ROLE_USER'];
-        return ['ROLE_ADMIN'];
+    	return $this->roles;
+    }
+
+    public function setRoles($roles) {
+        $this->roles = $roles;
     }
 
     public function getEmail() {
@@ -108,6 +113,14 @@ class User implements UserInterface
 
     public function removeShow(Show $show) {
     	$this->shows->remove($show);
+    }
+
+    public function getShows() {
+        return $this->shows;
+    }
+
+    public function setShows($shows) {
+        $this->shows = $shows;
     }
 
 }

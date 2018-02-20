@@ -41,5 +41,12 @@ services:
     AppBundle\ShowFinder\OMDBFinder:
         arguments:
             $client: '@csa_guzzle.client.OMDB_api'
+            $tokenStorage: '@security.token_storage'
             $apiKey: '%OMDB_api_key%'
         tags: ['show.finder']
+
+    AppBundle\Security\Authorization\ShowVoter:
+        tags: ['security.voter']
+
+    AppBundle\Security\Authorization\UserVoter:
+        tags: ['security.voter']
