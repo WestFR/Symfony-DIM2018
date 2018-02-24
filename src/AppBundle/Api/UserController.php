@@ -85,16 +85,21 @@ class UserController extends Controller {
 	public function updateAction(User $user, Request $request, SerializerInterface $serializer, 
 		ValidatorInterface $validator, EncoderFactoryInterface $encoderFactory) {
 
-		$newUser = $serializer->deserialize($request->getContent(), User::class, 'json');
+		$serializationContext = DeserializationContext::create();
+
+		$newUser = $serializer->deserialize($request->getContent(), User::class, 'json', $serializationContext->setGroups(['user_update']));
+
 		$constraintValidator = $validator->validate($newUser);
 
 		if($constraintValidator->count() == 0) {
-			
-			//$user->update($newUser);
-			//$encoder = $encoderFactory->getEncoder($user);
-            //$hashedPassword = $encoder->encodePassword($user->getPassword(),null);
-            //$user->setPassword($hashedPassword);
 
+			if($newUser->getPassword() != null) {
+				$encoder = $encoderFactory->getEncoder($newUser);
+            	$hashedPassword = $encoder->encodePassword($newUser->getPassword(),null);
+            	$newUser->setPassword($hashedPassword);
+			}
+			
+			$user->update($newUser);
 			$this->getDoctrine()->getManager()->flush();
 
 			return $this->returnResponse('User updated', Response::HTTP_CREATED);

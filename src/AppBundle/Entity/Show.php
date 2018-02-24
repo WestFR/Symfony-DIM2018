@@ -192,4 +192,33 @@ class Show {
 		$this->dataSource = $dataSource;
  	}
 	// Getter / Setters //
+
+	// Update method
+ 	public function update(Show $show) {
+
+ 		if($show->getName() != null) {
+             $this->name = $show->getName();
+        }
+
+        if($show->getAbstract() != null) {
+             $this->abstract = $show->getAbstract();
+        }
+
+        if($show->getCountry() != null) {
+             $this->country = $show->getCountry();
+        }
+
+        if($show->getRealisator() != null) {
+             $this->realisator = $show->getRealisator();
+        }
+
+        if($show->getReleaseDate() != null) {
+             $this->releaseDate = $show->getReleaseDate();
+        }
+
+        if($show->getMainPicture() != null) {
+             $this->mainPicture = $show->getMainPicture();
+        }
+ 	}
+
 }

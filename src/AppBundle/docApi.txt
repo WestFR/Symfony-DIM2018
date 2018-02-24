@@ -1,0 +1,19 @@
+//users
+{
+	"fullname":"Samuel ok",
+	"password":"ok",
+	"email":"ok@kokio.fr",
+	"roles":"ROLE_USER"
+}
+
+//shows
+{
+	"name":"Test",
+	"abstract":"TEST",
+	"country":"US",
+	"release_date":"2018-01-01",
+	"main_picture":"1518037895_Comedy.jpeg",
+	"realisator":"test",
+	"author": {"fullname":"Steven"},
+	"category": {"name":"Comedy"}
+}

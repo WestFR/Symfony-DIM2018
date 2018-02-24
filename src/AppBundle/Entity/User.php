@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity
  * @ORM\Table
- * @UniqueEntity("email")
+ * @UniqueEntity(fields={"email"}, groups={"user_create"})
  *
  * @JMS\ExclusionPolicy("all")
  */
@@ -23,7 +23,7 @@ class User implements UserInterface
 	 * @ORM\GeneratedValue
 	 * @ORM\Column(type="integer")
      *
-     * @JMS\Groups({"user"})
+     * @JMS\Groups({"user", "user_create"})
 	 */
 	private $id;
 
@@ -31,15 +31,17 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      *
      * @JMS\Expose
-     * @JMS\Groups({"user", "show"})
+     * @JMS\Groups({"user", "show",  "user_update"})
      */
     private $fullname;
 
     /**
      * @ORM\Column(type="json_array")
      *
-     * @JMS\Expose
+     * @Assert\NotBlank(groups={"user_create"})
+     *
      * @JMS\Type("string")
+     * @JMS\Expose
      * @JMS\Groups({"user_create"})
      */
     private $roles;
@@ -50,17 +52,17 @@ class User implements UserInterface
      * @Assert\Email
      *
      * @JMS\Expose
-     * @JMS\Groups({"user"})
+     * @JMS\Groups({"user", "user_update"})
      */
     private $email;
 
 	/**
      * @ORM\Column
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"user_create"})
      *
      * @JMS\Expose
-     * @JMS\Groups({"user_create"})
+     * @JMS\Groups({"user_create", "user_update"})
      */
     private $password;
 
@@ -144,4 +146,19 @@ class User implements UserInterface
         $this->shows = $shows;
     }
 
+    // Update Method
+    public function update(User $user) {
+    
+        if($user->getFullname() != null) {
+             $this->fullname = $user->getFullname();
+        }
+
+        if($user->getEmail() != null) {
+             $this->email = $user->getEmail();
+        }
+
+        if($user->getRoles() != null) {
+             $this->setRoles(explode(', ', $user->getRoles()));
+        } 
+    }
 }

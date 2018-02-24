@@ -31,7 +31,7 @@ class UserController extends Controller {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'NOT PASS');
 
 		$user = new User();
-        $userForm = $this->createForm(UserType::class, $user);
+        $userForm = $this->createForm(UserType::class, $user, ['validation_groups' => 'user_create']);
 
         $userForm->handleRequest($request);
 
@@ -48,7 +48,7 @@ class UserController extends Controller {
             $em->flush();
 
             $this->addFlash('success', 'You successfully added a new user !');
-            return $this->redirectToRoute('show_list');
+            return $this->redirectToRoute('user_list');
         }
         
         return $this->render('user/create.html.twig', ['userForm' => $userForm->createView()]);
@@ -69,7 +69,7 @@ class UserController extends Controller {
      */
     public function updateAction(Request $request, User $user, EncoderFactoryInterface $encoderFactory) {
 
-        $userForm = $this->createForm(UserType::class, $user);
+        $userForm = $this->createForm(UserType::class, $user, ['validation_groups' => 'user_update']);
         $userForm->handleRequest($request);
 
         if($userForm->isSubmitted() && $userForm->isValid()) {

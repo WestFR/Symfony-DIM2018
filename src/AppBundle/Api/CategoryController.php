@@ -3,7 +3,9 @@
 namespace AppBundle\Api;
 
 use AppBundle\Entity\Category;
+
 use JMS\Serializer\SerializerInterface;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -66,10 +68,10 @@ class CategoryController extends Controller {
 		$constraintValidator = $validator->validate($newCategory);
 
 		if($constraintValidator->count() == 0) {
+			
 			$category->update($newCategory);
 			$this->getDoctrine()->getManager()->flush();
-
-
+			
 			return $this->returnResponse('Category updated', Response::HTTP_CREATED);
 		}
 
