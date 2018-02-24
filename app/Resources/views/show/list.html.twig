@@ -12,11 +12,19 @@
 
     <!-- Set Image -->
     {% set img = '' %}
+    
     {% if show.dataSource == constant('AppBundle\\Entity\\Show::DATA_SOURCE_DB') %}
-      {% set img = asset(upload_folder ~'/'~ show.mainPicture) %}
+
+      {% if 'http' in show.mainPicture %}
+        {% set img = show.mainPicture %}
+      {% else %}
+        {% set img = asset(upload_folder ~'/'~ show.mainPicture) %}
+      {% endif %}
+
     {% elseif show.dataSource == constant('AppBundle\\Entity\\Show::DATA_SOURCE_OMDB') %}
       {% set img = show.mainPicture %}
     {% endif %}
+    <!-- Set Image -->
 
       <img class="card-img-top" src="{{ img }}" alt="{{ show.name}}">
      

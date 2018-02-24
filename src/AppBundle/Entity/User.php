@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity
  * @ORM\Table
- * @UniqueEntity(fields={"email"}, groups={"user_create"})
+ * @UniqueEntity("email", groups={"user_create"})
  *
  * @JMS\ExclusionPolicy("all")
  */
@@ -42,7 +42,7 @@ class User implements UserInterface
      *
      * @JMS\Type("string")
      * @JMS\Expose
-     * @JMS\Groups({"user_create"})
+     * @JMS\Groups({"user_create", "user_update"})
      */
     private $roles;
     

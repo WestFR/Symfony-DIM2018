@@ -54,11 +54,23 @@ class ShowController extends Controller {
 
 			$userRepo = $em->getRepository(User::class);
 			$catRepo = $em->getRepository(Category::class);
-  
-			$show->setAuthor($userRepo->findOneByFullname($show->getAuthor()->getFullname()));
-			$show->setCategory($catRepo->findOneByName($show->getCategory()->getName()));
-            $show->setDataSource(Show::DATA_SOURCE_DB);
+  	
+  			if($userRepo->findOneByFullname($show->getAuthor()->getFullname()) != null) {
+  				$show->setAuthor($userRepo->findOneByFullname($show->getAuthor()->getFullname()));
+  			}
+  			else {
+  				return $this->returnResponse("User doesn't exists, create that before.", Response::HTTP_CREATED);
+  			}
 
+  			if($catRepo->findOneByName($show->getCategory()->getName()) != null) {
+  				$show->setCategory($catRepo->findOneByName($show->getCategory()->getName()));
+  			}
+  			else {
+  				return $this->returnResponse("Category doesn't exists, create that before.", Response::HTTP_CREATED);
+  			}
+			
+            $show->setDataSource(Show::DATA_SOURCE_DB);
+            
 			$em->persist($show);
 			$em->flush();
 

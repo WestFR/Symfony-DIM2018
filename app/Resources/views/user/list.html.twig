@@ -30,7 +30,7 @@
 		      <td>{{ user.roles | join(', ') }}</td>
 		      <td>
 		      	{% for show in user.shows %}
-		      		{{ show.name }} {% if not loop.last %}.{% endif %}
+		      		<span> {{ show.name }} </span> {% if not loop.last %}.{% endif %}
 		      	{% else %} 
 		      		No shows yet. 
 	   			{% endfor %}

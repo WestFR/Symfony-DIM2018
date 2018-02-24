@@ -13,7 +13,11 @@
 
   <div class="card mb-4">
 
-    <img class="card-img-top" src="../uploads/{{ show.mainPicture }}" alt="Card image cap">
+    {% if 'http' in show.mainPicture %}
+      <img class="card-img-top" src="{{ show.mainPicture }}" alt="Card image cap">
+    {% else %}
+      <img class="card-img-top" src="../uploads/{{ show.mainPicture }}" alt="Card image cap">
+    {% endif %}
    
     <div class="card-body">
 

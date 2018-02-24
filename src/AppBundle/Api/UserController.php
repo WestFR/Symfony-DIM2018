@@ -98,7 +98,7 @@ class UserController extends Controller {
             	$hashedPassword = $encoder->encodePassword($newUser->getPassword(),null);
             	$newUser->setPassword($hashedPassword);
 			}
-			
+					
 			$user->update($newUser);
 			$this->getDoctrine()->getManager()->flush();
 
