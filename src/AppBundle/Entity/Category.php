@@ -7,6 +7,8 @@ use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+use Swagger\Annotations as SWG;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="category")
@@ -49,6 +51,7 @@ class Category {
 		$this->name = $name;
 	}
 
+	// Update Method
 	public function update(Category $category) {
 		$this->name = $category->getName();
 	}

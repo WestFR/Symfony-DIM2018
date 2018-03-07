@@ -8,6 +8,9 @@ use AppBundle\Entity\User;
 
 use JMS\Serializer\SerializerInterface;
 
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -24,7 +27,16 @@ class ShowController extends Controller {
 	/**
 	 * @Method({"GET"})
 	 * @Route("/all", name="_list")
-	 */
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Return alls shows.",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @Model(type=Show::class)
+     *     )
+     * )
+     */
 	public function getAll(SerializerInterface $serializer) {
 		$shows = $this->getDoctrine()->getRepository(Show::class)->findAll();
 		return $this->returnResponse($serializer->serialize($shows, 'json'), Response::HTTP_OK);
@@ -33,6 +45,12 @@ class ShowController extends Controller {
 	/**
 	 * @Method({"GET"})
 	 * @Route("/{id}", name="_get")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Return one specified show.",
+     *     @Model(type=Show::class)
+     * )
 	 */
 	public function getOne(Show $show, SerializerInterface $serializer) {
 		return $this->returnResponse($serializer->serialize($show, 'json'), Response::HTTP_OK);
@@ -41,6 +59,11 @@ class ShowController extends Controller {
 	/**
 	 * @Method({"POST"})
 	 * @Route("/create", name="_create")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Show created"
+     * )
 	 */
 	public function createAction(Request $request, SerializerInterface $serializer, ValidatorInterface $validator) {
 		
@@ -69,7 +92,7 @@ class ShowController extends Controller {
   				return $this->returnResponse("Category doesn't exists, create that before.", Response::HTTP_CREATED);
   			}
 			
-            $show->setDataSource(Show::DATA_SOURCE_DB);
+            $show->setDataSource(Show::DATA_SOURCE_DB_API);
             
 			$em->persist($show);
 			$em->flush();
@@ -83,6 +106,11 @@ class ShowController extends Controller {
 	/**
 	 * @Method({"PUT"})
 	 * @Route("/update/{id}", name="_update")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Show updated"
+     * )
 	 */
 	public function updateAction(Show $show, Request $request, SerializerInterface $serializer, ValidatorInterface $validator) {
 
@@ -118,6 +146,11 @@ class ShowController extends Controller {
 	/**
 	 * @Method({"DELETE"})
 	 * @Route("/delete/{id}", name="_delete")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Show removed"
+     * )
 	 */
 	public function deleteAction(Show $show, Request $request, ValidatorInterface $validator) {
 

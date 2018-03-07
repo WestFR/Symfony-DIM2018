@@ -9,6 +9,9 @@ use JMS\Serializer\SerializerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,6 +26,16 @@ class UserController extends Controller {
 	/**
 	 * @Method({"GET"})
 	 * @Route("/all", name="_list")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Return alls users.",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @Model(type=User::class)
+     *     )
+     * )
+     *
 	 */
 	public function getAll(SerializerInterface $serializer) {
 		$users = $this->getDoctrine()->getRepository(User::class)->findAll();
@@ -38,6 +51,12 @@ class UserController extends Controller {
 	/**
 	 * @Method({"GET"})
 	 * @Route("/{id}", name="_get")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Return one specified user.",
+     *     @Model(type=User::class)
+     * )
 	 */
 	public function getOne(User $user, SerializerInterface $serializer) {
 		
@@ -52,6 +71,11 @@ class UserController extends Controller {
 	/**
 	 * @Method({"POST"})
 	 * @Route("/create", name="_create")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="User created"
+     * )
 	 */
 	public function createAction(Request $request, SerializerInterface $serializer, ValidatorInterface $validator, EncoderFactoryInterface $encoderFactory) {
 
@@ -81,6 +105,11 @@ class UserController extends Controller {
 	/**
 	 * @Method({"PUT"})
 	 * @Route("/update/{id}", name="_update")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="User updated"
+     * )
 	 */
 	public function updateAction(User $user, Request $request, SerializerInterface $serializer, 
 		ValidatorInterface $validator, EncoderFactoryInterface $encoderFactory) {
@@ -111,6 +140,11 @@ class UserController extends Controller {
 	/**
 	 * @Method({"DELETE"})
 	 * @Route("/delete/{id}", name="_delete")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="User removed"
+     * )
 	 */
 	public function deleteAction(User $user, Request $request, ValidatorInterface $validator) {
 

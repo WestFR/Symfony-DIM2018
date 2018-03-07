@@ -3,12 +3,18 @@
 namespace AppBundle\Api;
 
 use AppBundle\Entity\Category;
+
 use JMS\Serializer\SerializerInterface;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**	
@@ -19,6 +25,15 @@ class CategoryController extends Controller {
 	/**
 	 * @Method({"GET"})
 	 * @Route("/all", name="_list")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Return alls categories.",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @Model(type=Category::class)
+     *     )
+     * )
 	 */
 	public function getAll(SerializerInterface $serializer) {
 		$categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
@@ -28,6 +43,12 @@ class CategoryController extends Controller {
 	/**
 	 * @Method({"GET"})
 	 * @Route("/{id}", name="_get")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Return one specified category.",
+     *     @Model(type=Category::class)
+     * )
 	 */
 	public function getOne(Category $category, SerializerInterface $serializer) {
 		return $this->returnResponse($serializer->serialize($category, 'json'), Response::HTTP_OK);
@@ -36,6 +57,11 @@ class CategoryController extends Controller {
 	/**
 	 * @Method({"POST"})
 	 * @Route("/create", name="_create")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Category created"
+     * )
 	 */
 	public function createAction(Request $request, SerializerInterface $serializer, ValidatorInterface $validator) {
 
@@ -58,6 +84,11 @@ class CategoryController extends Controller {
 	/**
 	 * @Method({"PUT"})
 	 * @Route("/update/{id}", name="_update")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Category updated"
+     * )
 	 */
 	public function updateAction(Category $category, Request $request, SerializerInterface $serializer, ValidatorInterface $validator) {
 
@@ -78,6 +109,11 @@ class CategoryController extends Controller {
 	/**
 	 * @Method({"DELETE"})
 	 * @Route("/delete/{id}", name="_delete")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Category removed"
+     * )
 	 */
 	public function deleteAction(Category $category, Request $request, ValidatorInterface $validator) {
 

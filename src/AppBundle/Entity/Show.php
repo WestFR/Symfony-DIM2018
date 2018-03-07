@@ -7,6 +7,11 @@ use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\User;
 
+use Swagger\Annotations as SWG;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\Type;
+
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ShowRepository")
  * @ORM\Table(name="s_shows")
@@ -17,6 +22,7 @@ class Show {
 
 	// Data source const
 	const DATA_SOURCE_OMDB = 'OMDB';
+	const DATA_SOURCE_DB_API = 'API_LOCAL_DATABASE';
 	const DATA_SOURCE_DB = 'LOCAL_DATABASE';
 
 	/**
@@ -69,6 +75,9 @@ class Show {
      *
 	 * @JMS\Expose
 	 * @JMS\Groups({"show"})
+	 *
+	 * @Accessor(getter="getAuthorAsArray")
+ 	 * @Type("array")
      */
 	private $author;
 
@@ -79,6 +88,9 @@ class Show {
 	 *
 	 * @JMS\Expose
 	 * @JMS\Groups({"show"})
+	 *
+	 * @Accessor(getter="getCategoryAsArray")
+ 	 * @Type("array")
 	 */
 	private $category;
 
@@ -193,6 +205,17 @@ class Show {
  	}
 	// Getter / Setters //
 
+ 	// List method for Category & Author properties
+	public function getAuthorAsArray()
+	{
+		return (array)$this->author->getFullname();
+	}
+
+	public function getCategoryAsArray()
+	{
+    return (array)$this->category->getName();
+	}
+
 	// Update method
  	public function update(Show $show) {
 
@@ -220,5 +243,4 @@ class Show {
              $this->mainPicture = $show->getMainPicture();
         }
  	}
-
 }
