@@ -76,6 +76,14 @@ class UserController extends Controller {
      *     response=200,
      *     description="User created"
      * )
+     *
+     * @SWG\Parameter(
+     *     name="user",
+     *     in="body",
+     *     type="array",
+     *	   @SWG\Schema(ref="#/definitions/User"),
+     *     description="User informations (see Model below for more informations)."
+     * )
 	 */
 	public function createAction(Request $request, SerializerInterface $serializer, ValidatorInterface $validator, EncoderFactoryInterface $encoderFactory) {
 

@@ -34,6 +34,8 @@ class User implements UserInterface
      *
      * @JMS\Expose
      * @JMS\Groups({"user", "show",  "user_update"})
+     *
+     * @SWG\Property(description="Fullname of the user.")
      */
     private $fullname;
 
@@ -45,6 +47,8 @@ class User implements UserInterface
      * @JMS\Type("string")
      * @JMS\Expose
      * @JMS\Groups({"user_create", "user_update"})
+     *
+     * @SWG\Property(description="Role(s) of the user (separated by ',').")
      */
     private $roles;
     
@@ -55,6 +59,8 @@ class User implements UserInterface
      *
      * @JMS\Expose
      * @JMS\Groups({"user", "user_update"})
+     *
+     * @SWG\Property(description="Unique email of the user.")
      */
     private $email;
 
@@ -65,6 +71,8 @@ class User implements UserInterface
      *
      * @JMS\Expose
      * @JMS\Groups({"user_create", "user_update"})
+     *
+     * @SWG\Property(description="Password of the user.")
      */
     private $password;
 

@@ -32,6 +32,7 @@ class Category {
 	 * @Assert\NotBlank
 	 *
 	 * @JMS\Expose
+	 * @SWG\Property(description="Unique name of the category.")
 	 */
 	private $name;
 

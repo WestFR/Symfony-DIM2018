@@ -62,6 +62,14 @@ class CategoryController extends Controller {
      *     response=200,
      *     description="Category created"
      * )
+     *
+     * @SWG\Parameter(
+     *     name="name",
+     *     in="body",
+     *     type="string",
+     *	   @SWG\Schema(ref="#/definitions/Category"),
+     *     description="Unique name of the category."
+     * )
 	 */
 	public function createAction(Request $request, SerializerInterface $serializer, ValidatorInterface $validator) {
 

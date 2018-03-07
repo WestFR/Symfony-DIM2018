@@ -7,10 +7,10 @@ use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\User;
 
-use Swagger\Annotations as SWG;
-
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Type;
+
+use Swagger\Annotations as SWG;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ShowRepository")
@@ -38,6 +38,8 @@ class Show {
 	 *
 	 * @JMS\Expose
 	 * @JMS\Groups({"show"})
+	 *
+	 * @SWG\Property(description="Unique name of the show.")
 	 */
 	private $name;
 
@@ -47,6 +49,8 @@ class Show {
 	 *
 	 * @JMS\Expose
 	 * @JMS\Groups({"show"})
+	 *
+	 * @SWG\Property(description="Description of the show.")
 	 */
 	private $abstract;
 
@@ -56,6 +60,8 @@ class Show {
 	 *
 	 * @JMS\Expose
 	 * @JMS\Groups({"show"})
+	 *
+	 * @SWG\Property(description="Code country of the show (Example : US, FR, EN).")
 	 */
 	private $country;
 
@@ -65,6 +71,8 @@ class Show {
 	 *
 	 * @JMS\Expose
 	 * @JMS\Groups({"show"})
+	 *
+	 * @SWG\Property(description="Realisator of the show.")
 	 */
 	private $realisator;
 
@@ -78,6 +86,8 @@ class Show {
 	 *
 	 * @Accessor(getter="getAuthorAsArray")
  	 * @Type("array")
+ 	 *
+	 * @SWG\Property(description="User of the show (See user fullname model).")
      */
 	private $author;
 
@@ -91,6 +101,8 @@ class Show {
 	 *
 	 * @Accessor(getter="getCategoryAsArray")
  	 * @Type("array")
+ 	 *
+	 * @SWG\Property(description="Category name of the show.")
 	 */
 	private $category;
 
@@ -100,6 +112,8 @@ class Show {
 	 *
 	 * @JMS\Expose
 	 * @JMS\Groups({"show"})
+	 *
+	 * @SWG\Property(description="Release date of the show (Example : 2018-01-01).")
 	 */
 	private $releaseDate;
 
@@ -108,6 +122,8 @@ class Show {
 	 * @Assert\Image(minHeight=300, minWidth=750, groups={"create"})
 	 *
 	 * @JMS\Expose
+	 *
+	 * @SWG\Property(description="Picture of the show (http url).")
 	 */
 	private $mainPicture;
 	

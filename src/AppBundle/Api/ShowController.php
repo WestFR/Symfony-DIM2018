@@ -64,6 +64,14 @@ class ShowController extends Controller {
      *     response=200,
      *     description="Show created"
      * )
+     *
+     * @SWG\Parameter(
+     *     name="show",
+     *     in="body",
+     *     type="array",
+     *	   @SWG\Schema(ref="#/definitions/Show"),
+     *     description="Show information (see Models below for more informations)."
+     * )
 	 */
 	public function createAction(Request $request, SerializerInterface $serializer, ValidatorInterface $validator) {
 		
