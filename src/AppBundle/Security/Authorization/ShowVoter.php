@@ -10,7 +10,7 @@ class ShowVoter extends Voter {
 
 	public function voteOnAttribute($attribute, $subject, TokenInterface $token) {
 
-		$user = $token->getUSer();
+		$user = $token->getUser();
 		$show = $subject;
 
 		// Si l'utilisateur est l'auteur du show, il peut faire quelque chose

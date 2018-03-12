@@ -18,14 +18,23 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
+        '0ccdf99b8f62f02c52cba55802e0c2e7' => __DIR__ . '/..' . '/zircote/swagger-php/src/functions.php',
         'c981538b8f549cbeff8c8ba3e46c919e' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'p' => 
+        array (
+            'phpDocumentor\\Reflection\\' => 25,
+        ),
         'Z' => 
         array (
             'Zend\\EventManager\\' => 18,
             'Zend\\Code\\' => 10,
+        ),
+        'W' => 
+        array (
+            'Webmozart\\Assert\\' => 17,
         ),
         'T' => 
         array (
@@ -49,6 +58,7 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
             'Symfony\\Bridge\\PhpUnit\\' => 23,
             'Symfony\\Bridge\\Monolog\\' => 23,
             'Symfony\\Bridge\\Doctrine\\' => 24,
+            'Swagger\\' => 8,
             'Sensio\\Bundle\\GeneratorBundle\\' => 30,
             'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
             'Sensio\\Bundle\\DistributionBundle\\' => 33,
@@ -63,9 +73,17 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
             'Psr\\Cache\\' => 10,
             'PackageVersions\\' => 16,
         ),
+        'N' => 
+        array (
+            'Nelmio\\ApiDocBundle\\' => 20,
+        ),
         'M' => 
         array (
             'Monolog\\' => 8,
+        ),
+        'J' => 
+        array (
+            'JMS\\SerializerBundle\\' => 21,
         ),
         'I' => 
         array (
@@ -80,6 +98,10 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         'F' => 
         array (
             'Fig\\Link\\' => 9,
+        ),
+        'E' => 
+        array (
+            'EXSyst\\Component\\Swagger\\' => 25,
         ),
         'D' => 
         array (
@@ -106,6 +128,12 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
     );
 
     public static $prefixDirsPsr4 = array (
+        'phpDocumentor\\Reflection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
         'Zend\\EventManager\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-eventmanager/src',
@@ -113,6 +141,10 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         'Zend\\Code\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-code/src',
+        ),
+        'Webmozart\\Assert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
         'Twig\\' => 
         array (
@@ -182,6 +214,10 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         array (
             0 => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Bridge/Doctrine',
         ),
+        'Swagger\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zircote/swagger-php/src',
+        ),
         'Sensio\\Bundle\\GeneratorBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/sensio/generator-bundle',
@@ -222,9 +258,17 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         array (
             0 => __DIR__ . '/..' . '/ocramius/package-versions/src/PackageVersions',
         ),
+        'Nelmio\\ApiDocBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nelmio/api-doc-bundle',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'JMS\\SerializerBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jms/serializer-bundle',
         ),
         'Incenteev\\ParameterHandler\\' => 
         array (
@@ -245,6 +289,10 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         'Fig\\Link\\' => 
         array (
             0 => __DIR__ . '/..' . '/fig/link-util/src',
+        ),
+        'EXSyst\\Component\\Swagger\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/exsyst/swagger/src',
         ),
         'Doctrine\\Instantiator\\' => 
         array (
@@ -320,6 +368,32 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
             'ProxyManager\\' => 
             array (
                 0 => __DIR__ . '/..' . '/ocramius/proxy-manager/src',
+            ),
+            'PhpOption\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoption/phpoption/src',
+            ),
+            'PhpCollection' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpcollection/phpcollection/src',
+            ),
+        ),
+        'M' => 
+        array (
+            'Metadata\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/metadata/src',
+            ),
+        ),
+        'J' => 
+        array (
+            'JMS\\Serializer' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/serializer/src',
+            ),
+            'JMS\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/parser-lib/src',
             ),
         ),
         'D' => 

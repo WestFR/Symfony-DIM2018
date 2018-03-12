@@ -12,11 +12,19 @@
 
     <!-- Set Image -->
     {% set img = '' %}
-    {% if show.dataSource == constant('AppBundle\\Entity\\Show::DATA_SOURCE_DB') %}
-      {% set img = asset(upload_folder ~'/'~ show.mainPicture) %}
+    
+    {% if show.dataSource == constant('AppBundle\\Entity\\Show::DATA_SOURCE_DB') or show.dataSource == constant('AppBundle\\Entity\\Show::DATA_SOURCE_DB_API') %}
+
+      {% if 'http' in show.mainPicture %}
+        {% set img = show.mainPicture %}
+      {% else %}
+        {% set img = asset(upload_folder ~'/'~ show.mainPicture) %}
+      {% endif %}
+
     {% elseif show.dataSource == constant('AppBundle\\Entity\\Show::DATA_SOURCE_OMDB') %}
       {% set img = show.mainPicture %}
     {% endif %}
+    <!-- Set Image -->
 
       <img class="card-img-top" src="{{ img }}" alt="{{ show.name}}">
      
@@ -39,12 +47,12 @@
         {% if show.dataSource == constant('AppBundle\\Entity\\Show::DATA_SOURCE_DB') %}
           <a href="#"> {{ show.realisator }} </a> - 
           {% if is_granted('ROLE_ADMIN', show) %}
-            Show added by <a href="#"> {{ show.author.fullname }} (You) </a>
-          {% else %}
-            Show added by <a href="#"> {{ show.author.fullname }} </a>
+            Show added by <a href="#"> {{ show.author.fullname }} (with back-end) </a>
           {% endif %}
         {% else %}
-          <a href="#"> {{ show.realisator }} </a> - Show research by <a href="#"> {{ show.author.fullname }} </a>
+          {% if is_granted('ROLE_ADMIN', show) %}
+          <a href="#"> {{ show.realisator }} </a> - Show added by <a href="#"> {{ show.author.fullname }} (with api) </a>
+          {% endif %}
         {% endif %}
       </div>
     </div>
