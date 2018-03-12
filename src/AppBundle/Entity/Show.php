@@ -5,10 +5,11 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Entity\User;
 
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Type;
+
+use AppBundle\Entity\User;
 
 use Swagger\Annotations as SWG;
 
