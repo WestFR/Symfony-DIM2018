@@ -86,7 +86,7 @@ class ShowController extends Controller {
 			$userRepo = $em->getRepository(User::class);
 			$catRepo = $em->getRepository(Category::class);
   	
-  			if($userRepo->findOneByFullname($show->getAuthor()->getFullname()) != null) {
+  			/*if($userRepo->findOneByFullname($show->getAuthor()->getFullname()) != null) {
   				$show->setAuthor($userRepo->findOneByFullname($show->getAuthor()->getFullname()));
   			}
   			else {
@@ -98,6 +98,20 @@ class ShowController extends Controller {
   			}
   			else {
   				return $this->returnResponse("Category doesn't exists, create that before.", Response::HTTP_CREATED);
+  			}*/
+
+  			if($userRepo->findOneByFullname($show->getAuthor()) != null) {
+  				$show->setAuthor($userRepo->findOneByFullname($show->getAuthor()));
+  			}
+  			else {
+  				return $this->returnResponse("User doesn't exists, create that before.", Response::HTTP_BAD_REQUEST);
+  			}
+
+  			if($catRepo->findOneByName($show->getCategory()) != null) {
+  				$show->setCategory($catRepo->findOneByName($show->getCategory()));
+  			}
+  			else {
+  				return $this->returnResponse("Category doesn't exists, create that before.", Response::HTTP_BAD_REQUEST);
   			}
 			
             $show->setDataSource(Show::DATA_SOURCE_DB_API);
@@ -131,6 +145,16 @@ class ShowController extends Controller {
 		if($constraintValidator->count() == 0) {
 
 			$em = $this->getDoctrine()->getManager();
+
+			/*if($newShow->getAuthor() != $show->getAuthorAsArray()) {
+				$userRepo = $em->getRepository(User::class);
+				$newShow->setAuthor($userRepo->findOneByFullname($show->getAuthorAsArray()));
+			} 
+
+			if($newShow->getCategory() != $show->getCategoryAsArray()) {
+				$catRepo = $em->getRepository(Category::class);
+				$newShow->setCategory($catRepo->findOneByName($show->getCategoryAsArray()));
+			}*/
 
 			if($newShow->getAuthor() != null) {
 				$userRepo = $em->getRepository(User::class);

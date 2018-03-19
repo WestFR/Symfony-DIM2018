@@ -6,6 +6,11 @@ use AppBundle\Entity\Media;
 use AppBundle\Type\MediaType;
 use AppBundle\File\FileUploader;
 
+use JMS\Serializer\SerializerInterface;
+
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -25,6 +30,11 @@ class MediaController extends Controller {
 	/**
 	 * @Method({"POST"})
 	 * @Route("/", name="_upload")
+	 *
+	 * @SWG\Response(
+     *     response=200,
+     *     description="Media uploaded, path is : 'path'"
+     * )
 	 */
 	public function uploadAction(Request $request, FileUploader $fileUploader, RouterInterface $router) {
 
