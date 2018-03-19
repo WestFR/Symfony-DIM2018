@@ -24,20 +24,18 @@ class AuthController extends Controller
         ]);
     }
 
-
-
     // ROUTES INTERCEPT BY FIREWALL
+        /**
+         * @Route("/login_check", name="login_check")
+         */
+        public function loginCheckAction() {
+            dump("This code is never executed");
+        }
 
-    /**
-     * @Route("/login_check", name="login_check")
-     */
-    public function loginCheckAction() {
-        dump("This code is never executed");
-    }
-
-    /**
-     * @Route("/logout", name="logout")
-     */
-    public function logoutCheckout() {
-    }
+        /**
+         * @Route("/logout", name="logout")
+         */
+        public function logoutCheckout() {
+        }
+    // ROUTES INTERCEPT BY FIREWALL
 }
