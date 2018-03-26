@@ -1,0 +1,42 @@
+<?php
+
+namespace AppBundle\Listener;
+
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+class ApiExceptionListener implements EventSubscriberInterface {
+	
+	const EXCEPTION_CODE = 'The server has a problem';
+
+	public static function getSubscribedEvents() 
+	{	
+		return [
+			KernelEvent::Exception => ['processExceptionForAPI', 1]
+		];
+	}
+
+	public function processExceptionForAPI(GetResponseForExceptionEvent $event) {
+
+		$request = $event->getRequest();
+		$routeName = $request->attributes->get('_route');
+		$api = substr($routeName, 0, 3);
+
+		if($api != 'api') {
+			return;
+		}
+
+		$data = [
+			'code' => self::EXCEPTION_CODE,
+			'message' => $event->getException()->getMessage()
+		];
+
+		$response = new JsonResponse($data, Response::HTTP_INTERNAL_SERVER_ERROR)
+
+		$event->setResponse($response);
+	}
+
+}

@@ -23,7 +23,7 @@ class ShowListener implements EventSubscriberInterface {
 	}
 
 	public static function getSubscribedEvents() {
-		
+
 		return [
 			[
 				'event' => Events::POST_DESERIALIZE,
@@ -32,6 +32,7 @@ class ShowListener implements EventSubscriberInterface {
 				'format' => 'json',
 			],
 		];
+
 	}
 
 	public function postDeserialize(PostDeserializeEvent $event) {
@@ -50,7 +51,7 @@ class ShowListener implements EventSubscriberInterface {
 
 		$em = $this->doctrine->getManager();
 
-		if(! $category = $em->getRepository('AppBundle:Category')->findOneBy($data['catgoery']['id'])) {
+		if(! $category = $em->getRepository('AppBundle:Category')->findOneBy($data['category']['id'])) {
 			throw new Exception("The category doesn't exists");
 		}
 
