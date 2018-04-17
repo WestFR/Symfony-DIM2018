@@ -77,8 +77,8 @@ final class Versions
   'zendframework/zend-eventmanager' => '3.2.0@9d72db10ceb6e42fb92350c0cb54460da61bd79c',
   'zircote/swagger-php' => '2.0.13@8b42fdc3d8c5a5e0d1f8d344aa359822c9f085e0',
   'sensio/generator-bundle' => 'v3.1.7@28cbaa244bd0816fd8908b93f90380bcd7b67a65',
-  'symfony/phpunit-bridge' => 'v3.4.4@6a65b09b666f975dd70ec2bb9e9b1a87dbb02aca',
-  'steven.fy/my_project' => 'dev-api_showroom@bbc2fcb753f34e903a0f8d98448cd4b09b29e064',
+  'symfony/phpunit-bridge' => 'v4.0.8@e82f3f46384482f2a7dab5f00c58a36b9726bde9',
+  'steven.fy/my_project' => 'dev-master@11a36160e01b5182a887811f99bec6d90584fc93',
 );
 
     private function __construct()

@@ -31,6 +31,7 @@ class OMDBFinder implements ShowFinderInterface {
 		if ($json['Response'] == 'False' && $json['Error'] == 'Series not found!') {
 			return [];
 		}
+		
 		//dump(\GuzzleHttp\json_decode($result->getBody(), true)); die;
 		return $this->convertToShow($json);
 	}
