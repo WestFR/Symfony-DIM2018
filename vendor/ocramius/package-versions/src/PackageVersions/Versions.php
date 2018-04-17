@@ -76,9 +76,11 @@ final class Versions
   'zendframework/zend-code' => '3.3.0@6b1059db5b368db769e4392c6cb6cc139e56640d',
   'zendframework/zend-eventmanager' => '3.2.0@9d72db10ceb6e42fb92350c0cb54460da61bd79c',
   'zircote/swagger-php' => '2.0.13@8b42fdc3d8c5a5e0d1f8d344aa359822c9f085e0',
+  'doctrine/data-fixtures' => 'v1.3.0@7b76ccc8e648c4502aad7f61347326c8a072bd3b',
+  'doctrine/doctrine-fixtures-bundle' => '3.0.2@7fc29d2b18c61ed99826b21fbfd1ff9969cc2e7f',
   'sensio/generator-bundle' => 'v3.1.7@28cbaa244bd0816fd8908b93f90380bcd7b67a65',
   'symfony/phpunit-bridge' => 'v4.0.8@e82f3f46384482f2a7dab5f00c58a36b9726bde9',
-  'steven.fy/my_project' => 'dev-master@11a36160e01b5182a887811f99bec6d90584fc93',
+  'steven.fy/my_project' => 'dev-master@6443cfb65898aa3f7a53ad1d506816eabf7890da',
 );
 
     private function __construct()

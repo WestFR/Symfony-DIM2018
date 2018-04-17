@@ -32,7 +32,6 @@ class OMDBFinder implements ShowFinderInterface {
 			return [];
 		}
 		
-		//dump(\GuzzleHttp\json_decode($result->getBody(), true)); die;
 		return $this->convertToShow($json);
 	}
 
